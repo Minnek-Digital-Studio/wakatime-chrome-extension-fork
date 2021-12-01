@@ -1,0 +1,84 @@
+{
+  "name": "chrome-wakatime",
+  "scripts": {
+    "test": "clap test",
+    "start": "clap build",
+    "gulp": "gulp",
+    "watch": "gulp watch",
+    "lint": "clap lint",
+    "postinstall": "clap postinstall",
+    "validate": "npm ls"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm test"
+    }
+  },
+  "lint-staged": {
+    "*.{js|jsx|ts|tsx}": [
+      "eslint",
+      "prettier --write",
+      "git add"
+    ],
+    "*.json": [
+      "prettier --write"
+    ]
+  },
+  "jest": {
+    "verbose": true,
+    "testURL": "http://localhost/",
+    "testFileExtensions": [
+      "jest.js"
+    ],
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "testDirectoryName": "tests",
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react"
+    ]
+  },
+  "private": true,
+  "devDependencies": {
+    "@types/node": "^14.14.20",
+    "@xarc/run": "^1.0.4",
+    "babel-jest": "^22.1.0",
+    "bower": "^1.7.9",
+    "chai": "^4.1.2",
+    "del": "^3.0.0",
+    "eslint": "^7.17.0",
+    "gulp": "^3.9.1",
+    "husky": "^4.3.7",
+    "jest-cli": "^22.1.4",
+    "jsdom": "^16.4.0",
+    "jshint": "^2.9.2",
+    "jsxhint": "^0.15.1",
+    "laravel-elixir": "^6.0.0-17",
+    "laravel-elixir-browserify-official": "^0.1.3",
+    "lint-staged": "^10.5.3",
+    "mocha": "^5.0.0",
+    "mocha-sinon": "^2.0.0",
+    "mocha-traceur": "^2.1.0",
+    "phantomjs": "^2.1.7",
+    "popper.js": "^1.14.6",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "sinon": "^4.2.2",
+    "sinon-chai": "^2.8.0",
+    "sinon-chrome": "^2.2.4",
+    "traceur": "^0.0.111",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.3"
+  },
+  "dependencies": {
+    "bootstrap": "3.4.1",
+    "classnames": "^2.2.5",
+    "create-react-class": "^15.6.3",
+    "font-awesome": "4.6.3",
+    "jquery": "^3.0.0",
+    "moment": "^2.13.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-transition-group": "^1.0.0",
+    "webextension-polyfill": "^0.4.0"
+  }
+}
