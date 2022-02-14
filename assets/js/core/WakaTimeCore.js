@@ -33,7 +33,7 @@ class WakaTimeCore {
       url: config.summariesApiUrl + '?start=' + today + '&end=' + today,
       dataType: 'json',
       success: (data) => {
-        deferredObject.resolve(data.data[0].grand_total);
+        deferredObject.resolve(data.data[0]);
       },
       error: (xhr, status, err) => {
         console.error(config.summariesApiUrl, status, err.toString());
@@ -58,6 +58,7 @@ class WakaTimeCore {
       dataType: 'json',
       success: (data) => {
         deferredObject.resolve(data.data);
+        console.log(data);
       },
       error: (xhr, status, err) => {
         console.error(config.currentUserApiUrl, status, err.toString());
@@ -115,6 +116,7 @@ class WakaTimeCore {
 
                 if (items.loggingStyle == 'whitelist') {
                   var heartbeat = this.getHeartbeat(currentActiveTab.url, items.whitelist);
+                  console.log('active URL: ', currentActiveTab.url)
                   if (heartbeat.url) {
                     this.sendHeartbeat(heartbeat, debug);
                   } else {
@@ -156,6 +158,7 @@ class WakaTimeCore {
       var projectIndicatorExists = projectIndicatorIndex > -1;
       var projectName = null;
       var urlFromLine = cleanLine;
+
       if (projectIndicatorExists) {
         var start = projectIndicatorIndex + projectIndicatorCharacters.length;
         projectName = cleanLine.substring(start);
@@ -166,9 +169,11 @@ class WakaTimeCore {
       var schemaHttpExists = url.match(/^http:\/\//i);
       var schemaHttpsExists = url.match(/^https:\/\//i);
       var schema = '';
+
       if (schemaHttpExists) {
         schema = 'http://';
       }
+
       if (schemaHttpsExists) {
         schema = 'https://';
       }
@@ -179,7 +184,7 @@ class WakaTimeCore {
       var startsWithUrl = cleanUrl.toLowerCase().indexOf(urlFromLine.toLowerCase()) > -1;
       if (startsWithUrl) {
         return {
-          url: schema + urlFromLine,
+          url: url,
           project: projectName,
         };
       }
@@ -205,8 +210,9 @@ class WakaTimeCore {
       entity: heartbeat.url,
       type: type,
       time: moment().format('X'),
-      project: heartbeat.project || '<<LAST_PROJECT>>',
+      project: heartbeat.project || 'Unknown Project',
       is_debugging: debug,
+      language: 'URL',
       plugin: 'browser-wakatime/' + config.version,
     });
   }
@@ -240,6 +246,8 @@ class WakaTimeCore {
    */
   sendHeartbeat(heartbeat, debug) {
     var payload = null;
+
+    console.log('URL: ', heartbeat.url);
 
     this._getLoggingType().done((loggingType) => {
       // Get only the domain from the entity.
