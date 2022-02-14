@@ -79,7 +79,9 @@ var MainList = reactCreateClass({
           <div className="row">
             <div className="col-xs-12">
               <blockquote>
-                <p>{that.props.totalTimeLoggedToday}</p>
+                <p>
+                  {that.props.totalTimeLoggedToday} on {that.props.totalProjectsToday} projects
+                </p>
                 <small>
                   <cite>TOTAL TIME LOGGED TODAY</cite>
                 </small>
@@ -96,7 +98,7 @@ var MainList = reactCreateClass({
 
         {loggingStatus()}
 
-        <div className="list-group">
+        <div className="list-group profile-list">
           <a href="#" className="list-group-item" onClick={this._openOptionsPage}>
             <i className="fa fa-fw fa-cogs"></i>
             Options

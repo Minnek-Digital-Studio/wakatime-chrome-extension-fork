@@ -60,9 +60,10 @@ var Wakatime = reactCreateClass({
           loggedIn: true,
         });
 
-        wakatime.getTotalTimeLoggedToday().done(function (grand_total) {
+        wakatime.getTotalTimeLoggedToday().done(function (data) {
           that.setState({
-            totalTimeLoggedToday: grand_total.text,
+            totalTimeLoggedToday: data.grand_total.text,
+            totalProjectsToday: data.projects.length || 0,
           });
         });
 
@@ -149,6 +150,7 @@ var Wakatime = reactCreateClass({
                 loggingEnabled={this.state.loggingEnabled}
                 user={this.state.user}
                 totalTimeLoggedToday={this.state.totalTimeLoggedToday}
+                totalProjectsToday={this.state.totalProjectsToday}
                 logoutUser={this._logoutUser}
                 loggedIn={this.state.loggedIn}
               />
