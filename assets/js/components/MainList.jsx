@@ -31,7 +31,10 @@ var MainList = reactCreateClass({
             <div className="panel-heading">
               <h3 className="panel-title">
                 <span>
-                  {that.props.user.full_name} {that.props.user.hasPremium === true && <span className="label label-success">Premium</span>}
+                  {that.props.user.full_name}{' '}
+                  {that.props.user.hasPremium === true && (
+                    <span className="label label-success">Premium</span>
+                  )}
                 </span>
 
                 <a href="#" onClick={that._openOptionsPage}>
@@ -54,18 +57,10 @@ var MainList = reactCreateClass({
                   />
                 </div>
                 <div className="media-body">
-                  <p className="media-text">
-                    {that.props.user.email}
-                  </p>
-                  <h5 className="media-heading m-top">
-                    Last Logged
-                  </h5>
-                  <p className="media-text">
-                    {that.props.user.lastLoggedTime}
-                  </p>
-                  <p className="media-text">
-                    Plugin: {that.props.user.lastPluginName}
-                  </p>
+                  <p className="media-text">{that.props.user.email}</p>
+                  <h5 className="media-heading m-top">Last Logged</h5>
+                  <p className="media-text">{that.props.user.lastLoggedTime}</p>
+                  <p className="media-text">Plugin: {that.props.user.lastPluginName}</p>
                   <p className="media-text" title={that.props.user.lastProjectName}>
                     Project: {projectName}
                   </p>
@@ -141,9 +136,7 @@ var MainList = reactCreateClass({
             <div className="col-xs-12">
               <div className="panel panel-default">
                 <div className="panel-heading">
-                  <h3 className="panel-title">
-                    Total Time Logged Today
-                  </h3>
+                  <h3 className="panel-title">Total Time Logged Today</h3>
                 </div>
                 <div className="panel-body">
                   {that.props.totalTimeLoggedToday} on {that.props.totalProjectsToday} projects
@@ -163,9 +156,7 @@ var MainList = reactCreateClass({
 
         {loggingStatus()}
 
-        <div className="list-group profile-list">
-          {loginLogoutButton()}
-        </div>
+        <div className="list-group profile-list">{loginLogoutButton()}</div>
       </div>
     );
   },
