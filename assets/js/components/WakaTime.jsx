@@ -4,6 +4,8 @@ var React = require('react');
 var reactCreateClass = require('create-react-class');
 var $ = require('jquery');
 
+var moment = require('moment');
+
 var config = require('../config');
 
 // React components
@@ -56,6 +58,10 @@ var Wakatime = reactCreateClass({
             full_name: data.full_name,
             email: data.email,
             photo: data.photo,
+            lastPluginName: data.last_plugin_name,
+            lastLoggedTime: moment(data.last_heartbeat_at).format('MM-DD-YY, h:mm:ss a'),
+            lastProjectName: data.last_project,
+            hasPremium: data.has_premium_features,
           },
           loggedIn: true,
         });

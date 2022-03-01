@@ -116,7 +116,7 @@ class WakaTimeCore {
 
                 if (items.loggingStyle == 'whitelist') {
                   var heartbeat = this.getHeartbeat(currentActiveTab.url, items.whitelist);
-                  console.log('active URL: ', currentActiveTab.url)
+                  console.log('active URL: ', currentActiveTab.url);
                   if (heartbeat.url) {
                     this.sendHeartbeat(heartbeat, debug);
                   } else {
@@ -210,7 +210,7 @@ class WakaTimeCore {
       entity: heartbeat.url,
       type: type,
       time: moment().format('X'),
-      project: heartbeat.project || 'Unknown Project',
+      project: heartbeat.project || '<<LAST_PROJECT>>',
       is_debugging: debug,
       language: 'URL',
       plugin: 'browser-wakatime/' + config.version,
