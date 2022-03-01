@@ -5,30 +5,6 @@ var NavBar = reactCreateClass({
   render: function () {
     var that = this;
 
-    var signedInAs = function () {
-      if (that.props.loggedIn === true) {
-        return (
-          <div className="profile navbar-text">
-            <img
-              class="profile-image"
-              src={
-                'https://ui-avatars.com/api/?name=' +
-                that.props.user.full_name.replace(' ', '+') +
-                '&background=0D8ABC&color=fff'
-              }
-              alt={that.props.user.full_name}
-            />
-            <div class="profile-content">
-              <p>
-                <b>{that.props.user.full_name}</b>
-              </p>
-              <p>{that.props.user.email}</p>
-            </div>
-          </div>
-        );
-      }
-    };
-
     var dashboard = function () {
       if (that.props.loggedIn === true) {
         return (
@@ -74,7 +50,6 @@ var NavBar = reactCreateClass({
             </a>
           </div>
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            {signedInAs()}
             <ul className="nav navbar-nav profile-nav">
               {customRules()}
               {dashboard()}

@@ -29,31 +29,38 @@ div#status {
   display: none;
 }
 
-.profile {
+.media-object {
+  border-radius: 50%;
+}
+
+.media-heading,
+.media-text {
+  margin: 0;
+}
+
+.media-heading {
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.m-top {
+  margin-top: 10px;
+}
+
+.panel-title {
+  padding: 5px 0;
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  width: 100%;
+  justify-content: space-between;
 }
 
-.profile-image {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  margin-right: 15px;
-  float: left;
+.panel-title .label {
+  background-color: #9b58b5;
+  margin-left: 5px;
 }
 
-.profile-content p {
-  margin: 0;
-  line-height: 1;
-}
-
-.profile-content p:last-child {
-  margin-top: 5px;
-}
-
-.profile-nav .fa,
-.profile-list .fa {
-  margin-right: 5px;
+.navbar-toggle {
+  height: 64px;
+  margin-top: 0;
+  margin-bottom: 0;
 }

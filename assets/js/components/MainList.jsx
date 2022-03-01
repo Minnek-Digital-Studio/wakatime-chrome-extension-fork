@@ -16,6 +16,67 @@ var MainList = reactCreateClass({
   render: function () {
     var that = this;
 
+    var signedInAs = function () {
+      if (that.props.loggedIn === true) {
+        var projectName = that.props.user.lastProjectName;
+        var projectNameLength = projectName.length;
+
+        if (projectNameLength > 20) {
+          projectName = projectName.substring(0, 20) + '...';
+        } else {
+          projectName = projectName;
+        }
+        return (
+          <div className="panel panel-default">
+            <div className="panel-heading">
+              <h3 className="panel-title">
+                <span>
+                  {that.props.user.full_name} {that.props.user.hasPremium === true && <span className="label label-success">Premium</span>}
+                </span>
+
+                <a href="#" onClick={that._openOptionsPage}>
+                  <i className="fa fa-fw fa-cog"></i>
+                  Options
+                </a>
+              </h3>
+            </div>
+            <div className="panel-body">
+              <div className="media">
+                <div className="media-left">
+                  <img
+                    className="media-object"
+                    src={
+                      'https://ui-avatars.com/api/?name=' +
+                      that.props.user.full_name.replace(' ', '+') +
+                      '&background=0D8ABC&color=fff'
+                    }
+                    alt={that.props.user.full_name}
+                  />
+                </div>
+                <div className="media-body">
+                  <p className="media-text">
+                    {that.props.user.email}
+                  </p>
+                  <h5 className="media-heading m-top">
+                    Last Logged
+                  </h5>
+                  <p className="media-text">
+                    {that.props.user.lastLoggedTime}
+                  </p>
+                  <p className="media-text">
+                    Plugin: {that.props.user.lastPluginName}
+                  </p>
+                  <p className="media-text" title={that.props.user.lastProjectName}>
+                    Project: {projectName}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      }
+    };
+
     var loginLogoutButton = function () {
       if (that.props.loggedIn === true) {
         return (
@@ -48,7 +109,7 @@ var MainList = reactCreateClass({
                   onClick={that.props.disableLogging}
                   className="btn btn-danger btn-block"
                 >
-                  Disable logging
+                  Disable time tracking
                 </a>
               </p>
             </div>
@@ -64,7 +125,7 @@ var MainList = reactCreateClass({
                   onClick={that.props.enableLogging}
                   className="btn btn-success btn-block"
                 >
-                  Enable logging
+                  Enable time tracking
                 </a>
               </p>
             </div>
@@ -78,14 +139,16 @@ var MainList = reactCreateClass({
         return (
           <div className="row">
             <div className="col-xs-12">
-              <blockquote>
-                <p>
+              <div className="panel panel-default">
+                <div className="panel-heading">
+                  <h3 className="panel-title">
+                    Total Time Logged Today
+                  </h3>
+                </div>
+                <div className="panel-body">
                   {that.props.totalTimeLoggedToday} on {that.props.totalProjectsToday} projects
-                </p>
-                <small>
-                  <cite>TOTAL TIME LOGGED TODAY</cite>
-                </small>
-              </blockquote>
+                </div>
+              </div>
             </div>
           </div>
         );
@@ -94,16 +157,13 @@ var MainList = reactCreateClass({
 
     return (
       <div>
+        {signedInAs()}
+
         {totalTimeLoggedToday()}
 
         {loggingStatus()}
 
         <div className="list-group profile-list">
-          <a href="#" className="list-group-item" onClick={this._openOptionsPage}>
-            <i className="fa fa-fw fa-cogs"></i>
-            Options
-          </a>
-
           {loginLogoutButton()}
         </div>
       </div>
