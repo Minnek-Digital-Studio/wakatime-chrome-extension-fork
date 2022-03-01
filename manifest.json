@@ -27,7 +27,7 @@
       "19": "graphics/wakatime-logo-19.png",
       "38": "graphics/wakatime-logo-38.png"
     },
-    "default_title": "WakaTime",
+    "default_title": "WakaTime FORK",
     "default_popup": "popup.html"
   },
   "options_ui": {
