@@ -32,5 +32,6 @@ vendor/bower_components
 
 # Generated chrome extension
 public/
+!/dist/public/
 web-ext-artifacts/
 .web-extension-id
